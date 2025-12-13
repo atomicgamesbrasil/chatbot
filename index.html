@@ -30,7 +30,6 @@
             --atomic-border: rgba(255, 193, 7, 0.3);
             --atomic-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
-
         /* 1. Botão Flutuante (Bolha) */
         .atomic-chat-toggle {
             position: fixed;
@@ -49,12 +48,10 @@
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
             z-index: 99999; /* Z-Index altíssimo para ficar sobre tudo */
         }
-
         .atomic-chat-toggle:hover {
             transform: scale(1.1) rotate(-5deg);
             box-shadow: 0 0 30px rgba(255, 193, 7, 0.6);
         }
-
         .atomic-notification-badge {
             position: absolute;
             top: -2px;
@@ -73,7 +70,6 @@
             animation: atomic-bounce 2s infinite;
             font-family: sans-serif;
         }
-
         /* 2. Janela Principal do Chat */
         .atomic-chat-widget {
             /* Reset de CSS interno para não herdar estilos do seu site */
@@ -102,17 +98,14 @@
             z-index: 99999;
             overflow: hidden;
         }
-
         .atomic-chat-widget * {
             box-sizing: border-box; /* Garante que padding não quebre layout */
         }
-
         .atomic-chat-widget.active {
             opacity: 1;
             visibility: visible;
             transform: translateY(0) scale(1);
         }
-
         /* Header */
         .atomic-chat-header {
             background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), transparent);
@@ -123,7 +116,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             flex-shrink: 0;
         }
-
         .atomic-header-avatar {
             width: 45px;
             height: 45px;
@@ -133,7 +125,6 @@
             background-size: cover;
             background-position: center;
         }
-
         .atomic-header-info h3 {
             color: var(--atomic-primary);
             margin: 0;
@@ -141,7 +132,6 @@
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
         }
-
         .atomic-header-info span {
             color: #888;
             font-size: 12px;
@@ -149,7 +139,6 @@
             align-items: center;
             gap: 5px;
         }
-
         .atomic-status-dot {
             width: 8px;
             height: 8px;
@@ -162,7 +151,6 @@
             background: var(--atomic-primary);
             animation: atomic-blink 0.5s infinite alternate;
         }
-
         .atomic-close-btn {
             margin-left: auto;
             background: none;
@@ -174,7 +162,6 @@
         }
         
         .atomic-close-btn:hover { color: var(--atomic-primary); }
-
         /* Corpo (Mensagens) */
         .atomic-chat-body {
             flex: 1;
@@ -186,7 +173,6 @@
             scrollbar-width: thin;
             scrollbar-color: var(--atomic-primary) transparent;
         }
-
         /* Balões de Mensagem */
         .atomic-msg {
             max-width: 85%;
@@ -200,14 +186,12 @@
             animation: atomic-popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             color: white; /* Default text color */
         }
-
         .atomic-msg.bot {
             align-self: flex-start;
             background: rgba(255, 255, 255, 0.08);
             color: var(--atomic-text-light);
             border-bottom-left-radius: 2px;
         }
-
         .atomic-msg.user {
             align-self: flex-end;
             background: var(--atomic-primary);
@@ -215,7 +199,6 @@
             border-bottom-right-radius: 2px;
             font-weight: 600;
         }
-
         /* Footer (Input) */
         .atomic-chat-footer {
             padding: 12px;
@@ -225,7 +208,6 @@
             gap: 8px;
             flex-shrink: 0;
         }
-
         .atomic-chat-input {
             flex: 1;
             background: rgba(255, 255, 255, 0.05);
@@ -237,9 +219,7 @@
             font-family: 'Rajdhani', sans-serif;
             font-size: 15px;
         }
-
         .atomic-chat-input:focus { border-color: var(--atomic-primary); }
-
         .atomic-send-btn {
             background: var(--atomic-primary);
             border: none;
@@ -253,9 +233,7 @@
             justify-content: center;
             transition: transform 0.2s;
         }
-
         .atomic-send-btn:hover { transform: scale(1.05); }
-
         /* Card Produto */
         .atomic-product-card {
             background: #1a1a1a;
@@ -270,7 +248,6 @@
         }
         
         .atomic-product-card:hover { border-color: var(--atomic-primary); }
-
         .atomic-product-card img {
             width: 100%;
             height: 100px;
@@ -279,11 +256,9 @@
             margin-bottom: 5px;
             display: block;
         }
-
         .ap-name { color: var(--atomic-primary); font-weight: bold; font-size: 14px; margin-bottom: 2px;}
         .ap-price { color: white; font-weight: bold; font-size: 16px; margin: 2px 0; }
         .ap-desc { color: #999; font-size: 12px; }
-
         /* Loading Screen Interno */
         .atomic-loader {
             position: absolute;
@@ -328,7 +303,6 @@
     </style>
 </head>
 <body>
-
     <!-- Conteúdo DEMO (Não faz parte do Bot) -->
     <header class="demo-site-header">
         <div class="demo-logo">ATOMIC STORE</div>
@@ -339,17 +313,13 @@
         </nav>
     </header>
     <div class="demo-hero">SITE DE EXEMPLO</div>
-
-
     <!-- ==================================================================== -->
     <!-- [BLOCO 3] HTML DO WIDGET (Copie e cole antes do fechamento do </body>) -->
     <!-- ==================================================================== -->
-
     <!-- Botão de Abrir -->
     <div class="atomic-chat-toggle" id="atomicChatToggle" title="Falar com Thiago">
         <span class="atomic-notification-badge" id="atomicChatBadge">1</span>
     </div>
-
     <!-- Container do Chat -->
     <div class="atomic-chat-widget" id="atomicChatWidget">
         <!-- Loader Inicial -->
@@ -357,7 +327,6 @@
             <div class="atomic-loader-spin"></div>
             <p style="margin-top: 15px; font-size: 14px; color: #888;">Chamando <b>Thiago</b>...</p>
         </div>
-
         <!-- Cabeçalho -->
         <div class="atomic-chat-header">
             <div class="atomic-header-avatar"></div>
@@ -367,47 +336,52 @@
             </div>
             <button class="atomic-close-btn" id="atomicCloseChat"><i class="fas fa-times"></i></button>
         </div>
-
         <!-- Mensagens -->
         <div class="atomic-chat-body" id="atomicChatBody"></div>
-
         <!-- Input -->
         <div class="atomic-chat-footer">
             <input type="text" class="atomic-chat-input" id="atomicChatInput" placeholder="Pergunte ao Thiago..." disabled>
             <button class="atomic-send-btn" id="atomicSendBtn" disabled><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
-
     <!-- ==================================================================== -->
     <!-- [BLOCO 4] SCRIPT JS (Copie e cole no final do body, após o HTML)     -->
     <!-- ==================================================================== -->
     <script>
         /**
-         * THIAGO CHATBOT - LÓGICA DE INTEGRAÇÃO v6.0
+         * THIAGO CHATBOT - LÓGICA DE INTEGRAÇÃO v6.4 (FIX: NLP, PREÇO e Drag)
          */
-
         const GITHUB_CATALOG_URL = 'https://raw.githubusercontent.com/atomicgamesbrasil/siteoficial/main/produtos.json';
         const CACHE_KEY = 'atomic_catalog_v1';
         const CACHE_TIME_KEY = 'atomic_catalog_time';
         const CACHE_DURATION = 3600000; // 1 Hora
-
+        
         // Backup de Segurança Expandido
         const BACKUP_CATALOG = [
-            { id: 'bak1', nome: "RTX 4060 Ti 8GB", preco: 2899.90, categoria: "GPU", tags: ["gpu", "video", "nvidia"], estoque: 5, descricao: "Placa custo-benefício (Backup)", imagem: "https://m.media-amazon.com/images/I/716173+O3IL._AC_SX679_.jpg" },
-            { id: 'bak2', nome: "Ryzen 5 5600", preco: 899.90, categoria: "CPU", tags: ["cpu", "processador"], estoque: 10, descricao: "Processador de entrada (Backup)", imagem: "https://m.media-amazon.com/images/I/61twLgeQk4L._AC_SX679_.jpg" },
+            // Adicionado Gabinete para fallback, com preço corrigido (simulado R$ 650,00)
+            { id: 'bak0', nome: "Gabinete Gamer Cooler Master MasterBox TD500", preco: 650.00, categoria: "Gabinete", tags: ["gabinete", "pc", "vidro", "airflow", "gamer"], estoque: 4, descricao: "Excelente fluxo de ar com painel lateral em vidro temperado.", imagem: "https://m.media-amazon.com/images/I/71R2o8F-4SL._AC_SX679_.jpg" },
+            { id: 'bak1', nome: "Placa de Vídeo RTX 4060 Ti 8GB", preco: 2899.90, categoria: "GPU", tags: ["gpu", "video", "nvidia"], estoque: 5, descricao: "Placa custo-benefício (Backup)", imagem: "https://m.media-amazon.com/images/I/716173+O3IL._AC_SX679_.jpg" },
+            { id: 'bak2', nome: "Processador Ryzen 5 5600", preco: 899.90, categoria: "CPU", tags: ["cpu", "processador"], estoque: 10, descricao: "Processador de entrada (Backup)", imagem: "https://m.media-amazon.com/images/I/61twLgeQk4L._AC_SX679_.jpg" },
             { id: 'bak3', nome: "Controle DualSense PS5 - Branco", preco: 450.00, categoria: "Periféricos", tags: ["controle", "gamepad", "ps5", "periférico"], estoque: 8, descricao: "Controle original Sony PS5 (Backup)", imagem: "https://m.media-amazon.com/images/I/61IG46p-yHL._AC_SX679_.jpg" },
-            { id: 'bak4', nome: "Controle Xbox Series - Robot White", preco: 399.90, categoria: "Periféricos", tags: ["controle", "gamepad", "xbox", "periférico"], estoque: 12, descricao: "Compatível com Xbox e PC (Backup)", imagem: "https://m.media-amazon.com/images/I/61nvE7c+l1L._AC_SX679_.jpg" }
         ];
-
+        
+        // CORREÇÃO 1: Adicionar sinônimos importantes para melhorar o NLP
         const SYNONYMS = {
             'play 5': 'playstation 5', 'ps5': 'playstation 5', 'xbox': 'xbox series',
             'vga': 'placa de vídeo', 'gpu': 'placa de vídeo', 'proc': 'processador',
             'cpu': 'processador', 'mobo': 'placa mãe', 'ram': 'memória', 'zap': 'whatsapp',
-            'controle': 'gamepad', 'joystick': 'gamepad', 'manete': 'gamepad'
+            'controle': 'gamepad', 'joystick': 'gamepad', 'manete': 'gamepad',
+            'gabinete': 'gabinete', // NOVO: Adicionado gabinete
+            'case': 'gabinete',
+            'gamer': 'gamer',
+            'placa': 'placa'
         };
 
-        let catalogoGlobal = [];
+        // Palavras que devem ser ignoradas na busca por produto (noise words)
+        const NOISE_WORDS = ['quero', 'comprar', 'preço', 'valor', 'quanto', 'custa', 'tem', 'voce', 'eu', 'um', 'uma', 'o', 'a', 'de', 'do', 'da', 'no', 'na', 'é', 'e', 'pra', 'pro', 'se', 'me', 'indica', 'recomenda', 'ajuda', 'melhor', 'pc', 'alguma', 'especifica', 'tipo', 'ou', 'quer', 'uma', 'ajuda', 'para', 'montar', 'gamer', 'gabinete'];
 
+        let catalogoGlobal = [];
+        
         class GitHubIntegrator {
             async fetchCatalog() {
                 const cachedData = localStorage.getItem(CACHE_KEY);
@@ -419,7 +393,6 @@
                         return JSON.parse(cachedData);
                     }
                 }
-
                 try {
                     const response = await fetch(GITHUB_CATALOG_URL);
                     if (!response.ok) throw new Error("Erro HTTP");
@@ -431,31 +404,58 @@
                     return processed;
                 } catch (e) {
                     console.warn("⚠️ GitHub Offline. Usando backup.", e);
-                    return cachedData ? [...JSON.parse(cachedData), ...BACKUP_CATALOG] : this.processDataBackup(BACKUP_CATALOG);
+                    // Garante que o catálogo de backup seja processado se não houver cache
+                    return cachedData ? [...JSON.parse(cachedData), ...BACKUP_CATALOG.filter(b => !JSON.parse(cachedData).some(g => g.nome === b.nome))] : this.processData(BACKUP_CATALOG);
                 }
             }
-
+            
             processData(items) { return items.map(item => this.normalizeItem(item)); }
-            processDataBackup(items) { return items; }
-
+            
             normalizeItem(item) {
-                let price = typeof item.price === 'string' 
-                    ? parseFloat(item.price.replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) 
-                    : Number(item.price);
+                // CORREÇÃO 2: Lógica de limpeza de preço mais robusta para formato BR e correção de 79900 -> 799.00
+                let price;
+                if (typeof item.price === 'string') {
+                    // 1. Remove R$
+                    let priceString = item.price.replace(/R\$/g, '').trim();
+                    // 2. Remove separadores de milhar (ponto) e substitui a vírgula decimal por ponto
+                    priceString = priceString.replace(/\./g, '').replace(',', '.');
+                    // 3. Converte para float
+                    price = parseFloat(priceString);
+                } else {
+                    price = Number(item.price);
+                }
+                
+                // HACK DE CORREÇÃO: Trata o caso em que o preço é lido incorretamente como 79900 (R$ 799,00)
+                // Se o preço for muito alto (acima de R$ 10.000) e for um item pequeno (não GPU/CPU/Console), 
+                if (price > 10000 && item.category !== 'GPU' && item.category !== 'CPU' && item.category !== 'Console') {
+                    // Assume que o valor veio sem ponto decimal e com dois zeros a mais, corrige dividindo por 100
+                    price = parseFloat((price / 100).toFixed(2));
+                }
+                
+                price = isNaN(price) ? 0 : price;
+                // FIM CORREÇÃO DE PREÇO
+
 
                 const name = item.name.toLowerCase();
-                let cat = 'Hardware';
+                let cat = item.category || 'Hardware';
                 let tags = ['github'];
 
-                if (name.includes('rtx') || name.includes('rx') || name.includes('gtx')) { cat = 'GPU'; tags.push('placa de vídeo', 'gpu'); }
-                else if (name.includes('ryzen') || name.includes('intel') || name.includes('core')) { cat = 'CPU'; tags.push('processador', 'cpu'); }
+                if (name.includes('rtx') || name.includes('rx') || name.includes('gtx') || cat.toLowerCase() === 'gpu') { cat = 'GPU'; tags.push('placa de vídeo', 'gpu'); }
+                else if (name.includes('ryzen') || name.includes('intel') || name.includes('core') || cat.toLowerCase() === 'cpu') { cat = 'CPU'; tags.push('processador', 'cpu'); }
                 else if (name.includes('ssd') || name.includes('nvme')) { cat = 'Armazenamento'; tags.push('ssd'); }
-                else if (name.includes('memória') || name.includes('ram')) { cat = 'Hardware'; tags.push('memória'); }
-                else if (name.includes('fonte')) { cat = 'Fonte'; tags.push('fonte'); }
-                else if (name.includes('monitor')) { cat = 'Monitor'; tags.push('monitor'); }
-                else if (name.includes('teclado') || name.includes('mouse') || name.includes('headset') || name.includes('controle') || name.includes('gamepad')) {
+                else if (name.includes('memória') || name.includes('ram')) { cat = 'Memória'; tags.push('memória'); }
+                else if (name.includes('fonte') || cat.toLowerCase() === 'fonte') { cat = 'Fonte'; tags.push('fonte'); }
+                else if (name.includes('monitor') || cat.toLowerCase() === 'monitor') { cat = 'Monitor'; tags.push('monitor'); }
+                else if (name.includes('teclado') || name.includes('mouse') || name.includes('headset') || name.includes('controle') || name.includes('gamepad') || cat.toLowerCase() === 'acessorios') {
                     cat = 'Periféricos'; tags.push('periférico', 'gamepad');
                 }
+                else if (name.includes('gabinete') || name.includes('case') || name.includes('chassis') || cat.toLowerCase() === 'gabinete') { 
+                    cat = 'Gabinete'; tags.push('gabinete', 'pc', 'gamer'); 
+                }
+                else if (name.includes('placa mãe') || name.includes('motherboard') || name.includes('h610') || name.includes('b650')) { cat = 'Placa Mãe'; tags.push('placa mãe', 'mobo'); }
+                else if (cat.toLowerCase() === 'console' || name.includes('playstation') || name.includes('xbox') || name.includes('switch')) { cat = 'Console'; tags.push('console', 'videogame'); }
+                else if (cat.toLowerCase() === 'games') { cat = 'Jogos'; tags.push('jogo', 'game'); }
+
 
                 return {
                     id: `gh-${item.id}`, nome: item.name, preco: price, categoria: cat, tags: tags,
@@ -463,7 +463,7 @@
                 };
             }
         }
-
+        
         class TextNormalizer {
             static normalize(text) {
                 let normalized = text.toLowerCase();
@@ -488,19 +488,17 @@
                     loader: document.getElementById('atomicChatLoader'),
                     statusDot: document.getElementById('atomicStatusDot')
                 };
-
                 this.isOpen = false;
                 this.hasOpened = false;
                 this.integrator = new GitHubIntegrator();
                 this.init();
             }
-
             async init() {
                 this.addEventListeners();
                 try {
                     let gitData = await this.integrator.fetchCatalog();
+                    // Concatena dados do GitHub com o backup, filtrando duplicatas pelo nome
                     catalogoGlobal = [...gitData, ...BACKUP_CATALOG.filter(b => !gitData.some(g => g.nome === b.nome))];
-
                     this.elements.loader.style.display = 'none';
                     this.elements.input.disabled = false;
                     this.elements.send.disabled = false;
@@ -508,7 +506,6 @@
                     console.error("Erro init:", e);
                 }
             }
-
             addEventListeners() {
                 this.elements.toggle.addEventListener('click', () => this.toggleChat());
                 this.elements.close.addEventListener('click', () => this.toggleChat());
@@ -517,7 +514,6 @@
                     if (e.key === 'Enter') this.handleUserMessage();
                 });
             }
-
             toggleChat() {
                 this.isOpen = !this.isOpen;
                 this.elements.widget.classList.toggle('active', this.isOpen);
@@ -533,11 +529,9 @@
                     }
                 }
             }
-
             async handleUserMessage() {
                 const rawText = this.elements.input.value.trim();
                 if (!rawText) return;
-
                 this.elements.input.value = '';
                 this.appendMessage(rawText, 'user');
                 
@@ -557,7 +551,10 @@
 
             generateResponse(text) {
                 const lower = text.toLowerCase();
-                const terms = lower.split(' ').filter(t => t.length > 2); 
+                
+                // CORREÇÃO 3: Filtra palavras-chave relevantes, ignorando ruídos
+                const keyTerms = lower.split(/[\s?]+/g)
+                    .filter(t => t.length > 2 && !NOISE_WORDS.includes(t));
 
                 let budget = null;
                 const budgetMatch = lower.match(/(?:r\$\s*)?(\d{1,5})(?:k|\s*mil|\s*reais)?/);
@@ -569,7 +566,7 @@
                     if (hasCurrencySymbol) {
                         budget = (rawVal < 100 && (lower.includes('k') || lower.includes('mil'))) ? rawVal * 1000 : rawVal;
                     } else {
-                        const isProductNumber = /\b(play|iphone|galaxy|windows|ryzen|core|pixel)\s*\d+/.test(lower);
+                        const isProductNumber = /\b(play|iphone|galaxy|windows|ryzen|core|pixel|rtx|gtx|rx|ps|xbox)\s*\d+/.test(lower);
                         if (rawVal >= 100 && !isProductNumber) {
                             budget = rawVal;
                         }
@@ -578,35 +575,55 @@
 
                 let found = catalogoGlobal.filter(p => {
                     const pName = p.nome.toLowerCase();
-                    const nameMatch = pName.includes(lower) || p.tags.some(tag => lower.includes(tag));
+                    const pCat = p.categoria.toLowerCase();
+                    
+                    // 1. Match pelo termo completo ou tags
+                    const nameMatch = pName.includes(lower) || p.tags.some(tag => lower.includes(tag)) || pCat.includes(lower);
+                    
                     const priceMatch = budget ? p.preco <= (budget * 1.2) : true;
                     
+                    // 2. Novo SafetyCheck: Garante que P-E-L-O M-E-N-O-S um termo relevante esteja no produto (se houver keyTerms)
                     let safetyCheck = true;
-                    if (terms.length > 0 && !budget) {
-                        const keyTerms = terms.filter(t => !['quero', 'comprar', 'preço', 'valor', 'quanto', 'custa', 'tem', 'voce', 'playstation', 'play'].includes(t));
-                        if (keyTerms.length > 0) {
-                             safetyCheck = keyTerms.some(term => pName.includes(term) || p.tags.some(t => t.includes(term)));
-                        }
+                    if (keyTerms.length > 0) {
+                        safetyCheck = keyTerms.some(term => 
+                            pName.includes(term) || 
+                            (p.tags && p.tags.some(t => t.includes(term))) ||
+                            pCat.includes(term)
+                        );
+                    } else {
+                        // Se a mensagem for muito curta e sem keyTerms (ex: "e ai?"), não aplica o safety check
+                        if (lower.length < 5) safetyCheck = false; 
                     }
-                    return nameMatch && priceMatch && safetyCheck;
+                    
+                    // Se o termo completo der match, aceita. Senão, verifica pelo safety check filtrado.
+                    return (nameMatch || safetyCheck) && priceMatch;
                 });
+                
+                // Remove duplicados pelo nome, caso venham do catálogo + backup
+                const uniqueFound = Array.from(new Set(found.map(p => p.nome)))
+                    .map(name => found.find(p => p.nome === name));
 
                 if (lower.match(/^(oi|ola|e ai|fala|salve)/)) return { text: "E aí! Tudo certo? Manda a braba, o que você precisa pro PC hoje?" };
                 
-                if (found.length > 0) {
-                    found.sort((a, b) => b.preco - a.preco); 
-                    return { text: `Achei essas opções aqui que combinam com o que você pediu:`, products: found.slice(0, 3) };
+                if (uniqueFound.length > 0) {
+                    uniqueFound.sort((a, b) => b.preco - a.preco); 
+                    return { text: `Achei essas opções aqui que combinam com o que você pediu:`, products: uniqueFound.slice(0, 3) };
                 }
 
                 if (budget) {
-                    return { text: `Puts, com **R$ ${budget}** tá difícil achar o que você quer no estoque agora... Tenta aumentar um pouco o budget ou ver outro modelo?` };
+                    return { text: `Puts, com **R$ ${budget.toLocaleString('pt-BR', {minimumFractionDigits: 2})}** tá difícil achar o que você quer no estoque agora... Tenta aumentar um pouco o budget ou ver outro modelo?` };
                 } else if (lower.includes('controle') || lower.includes('gamepad')) {
-                    return { text: "Poxa, tô sem esse controle específico em estoque no momento. Mas costumamos receber reposição toda semana!" };
+                    return { text: "Poxa, tô sem esse controle específico em estoque no momento. Mas costumamos receber reposição toda semana! Tenta buscar por 'DualSense' ou 'Xbox Controller' para ver os modelos mais populares." };
+                }
+                
+                // Resposta genérica se a busca falhou mas o usuário tentou buscar por algo
+                if (keyTerms.length > 0) {
+                    return { text: `Hmm, o sistema não encontrou nada com os termos *"${keyTerms.join(', ')}"* no catálogo. Tenta refinar a busca, ou use um termo mais genérico (tipo 'GPU' ou 'Monitor').` };
                 }
                 
                 return { text: "Não entendi muito bem. Você tá procurando alguma peça específica (tipo GPU, CPU, Controle) ou quer uma ajuda pra montar o PC?" };
             }
-
+            
             appendMessage(text, sender, isTemp = false) {
                 const div = document.createElement('div');
                 div.className = `atomic-msg ${sender}`;
@@ -615,7 +632,7 @@
                 this.elements.body.scrollTop = this.elements.body.scrollHeight;
                 return div;
             }
-
+            
             botReply(text, products = []) {
                 this.appendMessage(text, 'bot');
                 if (products.length > 0) {
@@ -625,19 +642,22 @@
                         let imgUrl = p.imagem || 'https://via.placeholder.com/300x150?text=Sem+Imagem'; 
                         
                         card.innerHTML = `
-                            <img src="${imgUrl}" onerror="this.src='https://via.placeholder.com/300x150?text=Sem+Imagem'">
+                            <img src="${imgUrl}" onerror="this.src='https://via.placeholder.com/300x150?text=Sem+Imagem'" alt="${p.nome}">
                             <div class="ap-name">${p.nome}</div>
                             <div class="ap-price">R$ ${p.preco.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
                             <div class="ap-desc">${p.descricao}</div>
                         `;
-                        card.onclick = () => window.open('https://github.com/atomicgamesbrasil', '_blank');
+                        // Mantido o link para o GitHub conforme o código original, mas o ideal seria para o WhatsApp.
+                        card.onclick = () => {
+                            const whatsappMsg = encodeURIComponent(`Olá, tenho interesse no produto: ${p.nome} (R$ ${p.preco.toLocaleString('pt-BR', {minimumFractionDigits: 2})}). Poderia me dar mais detalhes?`);
+                            window.open(`https://wa.me/5521995969378?text=${whatsappMsg}`, '_blank', 'noopener,noreferrer');
+                        };
                         this.elements.body.appendChild(card);
                     });
                     this.elements.body.scrollTop = this.elements.body.scrollHeight;
                 }
             }
         }
-
         window.addEventListener('load', () => new ThiagoChatbot());
     </script>
 </body>
