@@ -349,7 +349,9 @@
     <!-- ==================================================================== -->
     <script>
         /**
-         * THIAGO CHATBOT - LÓGICA DE INTEGRAÇÃO v6.4 (FIX: NLP, PREÇO e Drag)
+         * THIAGO CHATBOT - LÓGICA DE INTEGRAÇÃO v6.5 (FIX: NLP, PREÇO, + ADD TO CART CONFIRMATION)
+         * * IMPORTANTE: Esta versão depende da existência de uma função global no site principal:
+         * * window.addToCart(productId) -> Função para adicionar o item ao carrinho do site.
          */
         const GITHUB_CATALOG_URL = 'https://raw.githubusercontent.com/atomicgamesbrasil/siteoficial/main/produtos.json';
         const CACHE_KEY = 'atomic_catalog_v1';
@@ -371,7 +373,7 @@
             'vga': 'placa de vídeo', 'gpu': 'placa de vídeo', 'proc': 'processador',
             'cpu': 'processador', 'mobo': 'placa mãe', 'ram': 'memória', 'zap': 'whatsapp',
             'controle': 'gamepad', 'joystick': 'gamepad', 'manete': 'gamepad',
-            'gabinete': 'gabinete', // NOVO: Adicionado gabinete
+            'gabinete': 'gabinete', 
             'case': 'gabinete',
             'gamer': 'gamer',
             'placa': 'placa'
@@ -491,6 +493,10 @@
                 this.isOpen = false;
                 this.hasOpened = false;
                 this.integrator = new GitHubIntegrator();
+                
+                // NOVO: Variável de estado para confirmação de carrinho
+                this.pendingProductId = null;
+                
                 this.init();
             }
             async init() {
@@ -529,6 +535,7 @@
                     }
                 }
             }
+            
             async handleUserMessage() {
                 const rawText = this.elements.input.value.trim();
                 if (!rawText) return;
@@ -536,6 +543,39 @@
                 this.appendMessage(rawText, 'user');
                 
                 const normalizedText = TextNormalizer.normalize(rawText);
+
+                // ===============================================
+                // NOVA LÓGICA DE CONFIRMAÇÃO DE CARRINHO (PRIORIDADE MÁXIMA)
+                // ===============================================
+                if (this.pendingProductId) {
+                    const isYes = rawText.toLowerCase().includes('sim');
+                    const isNo = rawText.toLowerCase().includes('não') || rawText.toLowerCase().includes('nao');
+
+                    const product = catalogoGlobal.find(p => p.id === this.pendingProductId);
+                    
+                    if (isYes) {
+                        if (product && typeof window.addToCart === 'function') {
+                            window.addToCart(this.pendingProductId); // Chama a função do site principal
+                            this.botReply(`**Adicionado!** O *${product.nome}* já está no seu carrinho. Posso te ajudar com mais alguma coisa?`);
+                        } else if (product) {
+                             // Fallback se addToCart não existir no site principal
+                             this.botReply(`**Simulação de adição!** O *${product.nome}* seria adicionado ao carrinho. (A função 'window.addToCart' precisa ser definida no site principal para funcionar). Posso te ajudar com mais alguma coisa?`);
+                        } else {
+                             this.botReply(`Opa, deu um erro! Não consegui encontrar o produto. Tente buscar novamente.`);
+                        }
+                    } else if (isNo) {
+                        this.botReply(`Entendido! O *${product ? product.nome : 'produto'}* não foi adicionado. Quer buscar outro item ou falar com um humano?`);
+                    } else {
+                        // Mensagem não é sim nem não, espera nova resposta
+                        this.botReply(`Por favor, responda com *Sim* ou *Não* para confirmar se deseja adicionar ao carrinho.`);
+                        return; 
+                    }
+
+                    // Reseta o estado após processar Sim ou Não (ou erro)
+                    this.pendingProductId = null;
+                    return;
+                }
+                // ===============================================
                 
                 this.elements.statusDot.classList.add('typing');
                 const loadingMsg = this.appendMessage('<i class="fas fa-ellipsis-h"></i>', 'bot', true);
@@ -647,11 +687,16 @@
                             <div class="ap-price">R$ ${p.preco.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
                             <div class="ap-desc">${p.descricao}</div>
                         `;
-                        // Mantido o link para o GitHub conforme o código original, mas o ideal seria para o WhatsApp.
+                        
+                        // NOVO: Ação de clique do card para CONFIRMAÇÃO de adição ao carrinho
                         card.onclick = () => {
-                            const whatsappMsg = encodeURIComponent(`Olá, tenho interesse no produto: ${p.nome} (R$ ${p.preco.toLocaleString('pt-BR', {minimumFractionDigits: 2})}). Poderia me dar mais detalhes?`);
-                            window.open(`https://wa.me/5521995969378?text=${whatsappMsg}`, '_blank', 'noopener,noreferrer');
+                            // 1. Define o produto pendente (estado)
+                            this.pendingProductId = p.id;
+                            
+                            // 2. Envia a pergunta de confirmação do bot
+                            this.botReply(`Excelente escolha! Quer que eu adicione o **${p.nome}** ao seu carrinho? Responda com *Sim* ou *Não*.`);
                         };
+                        
                         this.elements.body.appendChild(card);
                     });
                     this.elements.body.scrollTop = this.elements.body.scrollHeight;
